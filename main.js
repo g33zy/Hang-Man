@@ -13,6 +13,32 @@ const rl = readline.createInterface({
 // console.log("Hi " + name + ", nice to meet you.");
 
 
+const hangManPics = ['O-}--<', 'O-}--', 'O-}-', 'O-}', 'O-', 'O']
+
+
+// const hangManPics = ['O',
+//                      '|',
+//                     '/','\\',
+
+
+
+
+
+
+// ]
+
+// const body1 = "+-----+"
+// const body4 = '|-----O'
+
+// console.log("|-------O")
+// console.log("|------/|\\")
+// console.log("|------/-\\")
+// console.log("|")
+// console.log("|")
+
+
+
+
 
 const wordBank = [
   "variable",
@@ -33,7 +59,7 @@ const wordBank = [
 ];
 
 let randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-console.log(randomWord)
+// console.log(randomWord)
 
 let board = new Array(randomWord.length).fill("_");
 console.log(board);
@@ -60,9 +86,13 @@ const guess = (input) => {
 
     console.log(`You have ${lives} left`)
 
-  }
 
+
+  }
+  console.log(hangManPics[lives])
   console.log(board)
+
+
 }
 
 
@@ -71,7 +101,7 @@ const checkForWin = () => {
   console.log(`You won!`)
 } else if (lives === 0) {
 
-  console.log('You lose!')
+  console.log(`You lose! The word is: ${randomWord}`)
 }
  
 }

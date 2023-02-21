@@ -11,27 +11,8 @@ const rl = readline.createInterface({
 
 // console.log("Hi " + name + ", nice to meet you.");
 
-
+// steves original idea for an easy hangman/deadman diagram, to show that you can do it this way as an
 // const hangManPics = ['O-}--<', 'O-}--', 'O-}-', 'O-}', 'O-', 'O']
-
-
-// const hangManPics = ['O',
-//                      '|',
-//                     '/','\\',
-
-
-// ]
-
-// const body1 = "+-----+"
-// const body4 = '|-----O'
-
-// console.log("|-------O")
-// console.log("|------/|\\")
-// console.log("|------/-\\")
-// console.log("|")
-// console.log("|")
-
-
 
 
 
@@ -53,22 +34,30 @@ const wordBank = [
   "parse",
 ];
 
+// Uses the word bank to randomize array and choose a word for the hangman game.
 let randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-// console.log(randomWord)
+// console.log(randomWord) to show answer in terminal 
 
+// creates a new array that pushes the random word and changes each letter into an underscore "_"
 let board = new Array(randomWord.length).fill("_");
 console.log(board);
 
+// sets the number lives for the player lives
 let lives = 6;
 
+// takes the input of the player
 const guess = (input) => {
+    // loops through the randomWord array checks if input is equal to the 
   for (let i = 0; i < randomWord.length; i++) {
     if (input === randomWord[i]) {
+       // sets board array as input
       board[i] = input;
     }
   }
+  // condition if random word is not found
   if (!randomWord.includes(input)) {
     console.log("You have lost a life");
+     // subtracts a life
     lives--;
 
     console.log(`You have ${lives} left`)
@@ -82,15 +71,15 @@ const guess = (input) => {
 
 }
 
-
+// If board still has an underscore string "_"
 const checkForWin = () => {
   if (!board.includes("_")) {
-    console.log(`You won!`);
+    console.log(`YOU WON! ☜(ﾟヮﾟ☜)`);
   } else if (lives === 0) {
     console.log(`You lose! The word was: ${randomWord}`);
   }
 };
-// Checks how many lives the player has and populates a hangman figure for each life.
+// Checks how many lives the player has and populates a hangman figure for each life taken
 function checkNumLives() {
   if (lives === 6) {
     console.log(
@@ -185,12 +174,14 @@ function checkNumLives() {
   }
 }
 
+// hangMan function runs other functions and takes an answer as a parameter
 const hangMan = (answer) => {
   guess(answer);
   checkNumLives();
   checkForWin();
 };
 
+// shows the prompt for users to see instruction and type their guesses
 const getPrompt = () => {
   rl.question("Guess a letter! ", (answer) => {
     hangMan(answer);
